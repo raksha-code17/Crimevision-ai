@@ -2,6 +2,8 @@
 
 **Intelligent Multimodal Forensic Analysis Platform**
 
+🚀 **[Launch the live Streamlit app](https://crimevision-ai-mr9fsp2m6eraas5ufgakyq.streamlit.app/)**
+
 CrimeVision AI is a web application that helps investigators analyse crime-scene evidence. Upload **photos**, **video footage**, **audio** or **transcripts**, and the platform detects people and weapon-class objects, flags forensic indicators, aligns everything on a single timeline, classifies the incident, checks witness statements against what the footage shows, lets you ask questions about the evidence, and produces a downloadable report.
 
 > **Privacy note:** Local analysis runs on your computer. If you enable cloud AI features (such as Groq-backed chat or cloud vision), relevant prompts and supported image content may be sent to the configured provider for processing. Do not upload sensitive real-world evidence unless you are authorised to do so.
