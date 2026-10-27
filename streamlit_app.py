@@ -11,6 +11,16 @@ import streamlit as st
 
 st.set_page_config(page_title="CrimeVision AI", page_icon="🔎", layout="wide")
 
+# Streamlit Community Cloud stores credentials in st.secrets, not in the shell environment.
+# Set these before backend.config is imported by create_app().
+try:
+    for _secret_name in ("GROQ_API_KEY", "GROQ_MODEL", "GROQ_TEMPERATURE", "CLOUD_VISION", "GROQ_VISION_MODELS"):
+        if _secret_name in st.secrets and not os.environ.get(_secret_name):
+            os.environ[_secret_name] = str(st.secrets[_secret_name])
+except (FileNotFoundError, RuntimeError):
+    # No secrets.toml locally is normal; local .env remains supported.
+    pass
+
 ON_CLOUD = Path("/mount/src").exists()  # Streamlit Community Cloud
 BASE = Path(os.environ.get("CRIMEVISION_DATA", Path(tempfile.gettempdir()) / "crimevision"))
 VIDEO_MIME = {"mp4": "video/mp4", "webm": "video/webm", "mov": "video/quicktime", "avi": "video/x-msvideo", "mkv": "video/x-matroska"}
