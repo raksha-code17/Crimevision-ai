@@ -1,0 +1,12 @@
+# Used by Streamlit Community Cloud (light mode: no heavy AI models, headless OpenCV).
+# For the full local AI models run: pip install -r requirements-ai.txt
+streamlit>=1.32
+Flask>=3.0
+Flask-Cors>=4.0
+python-dotenv>=1.0
+numpy
+Pillow
+opencv-python-headless==4.10.0.84
+reportlab>=4.0
+matplotlib
+python-docx

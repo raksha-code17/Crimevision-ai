@@ -1,0 +1,11 @@
+# For free web hosting (Render): light mode, no heavy AI models, headless OpenCV (no display libraries needed).
+Flask>=3.0
+Flask-Cors>=4.0
+python-dotenv>=1.0
+numpy
+Pillow
+opencv-python-headless
+reportlab>=4.0
+matplotlib
+python-docx
+gunicorn

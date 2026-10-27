@@ -1,0 +1,11 @@
+# Light install: runs everywhere, no heavy AI downloads. Use with Groq (cloud) for rich image/video understanding.
+Flask>=3.0
+Flask-Cors>=4.0
+python-dotenv>=1.0
+numpy
+Pillow
+opencv-python
+reportlab>=4.0
+matplotlib
+python-docx
+groq

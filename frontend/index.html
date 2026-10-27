@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CrimeVision AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="logo" aria-hidden="true"></span><span class="wordmark">CrimeVision AI</span></div>
+    <div class="case" id="caseName">No case open</div>
+    <div class="status" id="status" aria-live="polite"></div>
+    <div class="actions">
+      <button class="btn" id="newBtn" type="button">New case</button>
+      <button class="btn" id="demoBtn" type="button">Load demo case</button>
+      <button class="btn" id="addBtn" type="button">Add evidence</button>
+      <button class="btn primary" id="runBtn" type="button" disabled>Run analysis</button>
+      <span class="menu">
+        <a class="btn disabled" id="reportPdf" href="#" aria-disabled="true">Report (PDF)</a>
+        <a class="btn disabled" id="reportDocx" href="#" aria-disabled="true">Word</a>
+      </span>
+    </div>
+    <input type="file" id="fileInput" multiple hidden accept="image/*,audio/*,video/*,.txt,.srt,.vtt">
+  </header>
+
+  <main class="workspace">
+    <section class="panel evidence" id="evidencePanel" aria-label="Evidence"></section>
+    <section class="panel viewport" id="viewportPanel" aria-label="Viewport"></section>
+    <section class="panel timeline" id="timelinePanel" aria-label="Timeline"></section>
+    <section class="panel side" aria-label="Analysis">
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-findings" aria-selected="true" aria-controls="findingsPanel">Findings</button>
+        <button role="tab" id="tab-chat" aria-selected="false" aria-controls="chatPanel">Ask the evidence</button>
+      </div>
+      <div class="tabpanel" id="findingsPanel" role="tabpanel" aria-labelledby="tab-findings"></div>
+      <div class="tabpanel" id="chatPanel" role="tabpanel" aria-labelledby="tab-chat" hidden></div>
+    </section>
+  </main>
+
+  <div class="toasts" id="toasts" role="alert"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
