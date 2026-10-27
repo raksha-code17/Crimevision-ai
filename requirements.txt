@@ -10,3 +10,4 @@ opencv-python-headless==4.10.0.84
 reportlab>=4.0
 matplotlib
 python-docx
+groq>=0.11.0
