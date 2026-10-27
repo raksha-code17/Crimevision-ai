@@ -4,8 +4,8 @@
 
 CrimeVision AI is a web application that helps investigators analyse crime-scene evidence. Upload **photos**, **video footage**, **audio** or **transcripts**, and the platform detects people and weapon-class objects, flags forensic indicators, aligns everything on a single timeline, classifies the incident, checks witness statements against what the footage shows, lets you ask questions about the evidence, and produces a downloadable report.
 
-> By default, all analysis runs on your own computer and no evidence is sent to any outside service.
-> Results are AI-generated leads for a human investigator, not confirmed findings.
+> **Privacy note:** Local analysis runs on your computer. If you enable cloud AI features (such as Groq-backed chat or cloud vision), relevant prompts and supported image content may be sent to the configured provider for processing. Do not upload sensitive real-world evidence unless you are authorised to do so.
+> Results are AI-generated leads for a human investigator, not confirmed findings. Always verify results against the original evidence.
 
 ![Dashboard](docs/screenshots/dashboard.png)
 
@@ -85,16 +85,46 @@ Then open http://localhost:5000. Settings live in `.env` (copy `.env.example` to
 
 ## Streamlit version
 
-The same analysis engine is also available as a Streamlit app (`streamlit_app.py`).
+The repository includes a Streamlit interface in `streamlit_app.py`. The root `requirements.txt` contains the lightweight dependencies intended for Streamlit Community Cloud.
 
-Run it locally:
+### Run locally
 
 ```bash
-pip install -r requirements.txt
-streamlit run streamlit_app.py
+python -m pip install -r requirements.txt
+python -m streamlit run streamlit_app.py
 ```
 
-Deploy it on [Streamlit Community Cloud](https://share.streamlit.io): choose **Create app**, pick this repository, set the branch to `main` and the main file path to `streamlit_app.py`. In **Advanced settings** choose Python 3.11. The root `requirements.txt` installs the light version; free servers are too small for the AI models, so the hosted app runs in basic mode (people, motion and transcripts). Run it locally with `requirements-ai.txt` installed for knife detection and forensic tags.
+### Deploy on Streamlit Community Cloud
+
+1. Open [Streamlit Community Cloud](https://share.streamlit.io/) and connect your GitHub account.
+2. Create an app from this repository, select the `main` branch, and set **Main file path** to `streamlit_app.py`.
+3. Choose Python 3.11 in the advanced settings if prompted.
+4. Under the app's **Settings → Secrets**, add your Groq settings if you want cloud-backed AI responses:
+
+   ```toml
+   GROQ_API_KEY = "your_actual_groq_api_key"
+   GROQ_MODEL = "llama-3.3-70b-versatile"
+   GROQ_TEMPERATURE = "0.15"
+   CLOUD_VISION = "true"
+   ```
+
+   Create/manage a Groq key at [Groq Console](https://console.groq.com/keys). Keep it in Streamlit Secrets or a local `.env` file—**never commit the real key to GitHub**. The committed `.env.example` must contain placeholders only.
+
+5. After pushing changes to GitHub, Streamlit Community Cloud normally redeploys the app automatically. Check the app dashboard/logs if deployment fails.
+
+### Local environment variables
+
+For local development, create a `.env` file in the project root with your own key:
+
+```dotenv
+GROQ_API_KEY=your_actual_groq_api_key
+GROQ_MODEL=llama-3.3-70b-versatile
+GROQ_TEMPERATURE=0.15
+CLOUD_VISION=true
+USE_ML_MODELS=true
+```
+
+Install `requirements-ai.txt` locally if you want to try the heavier local AI models. Hosted environments may use a lightweight/basic analysis mode because of memory and CPU limits. Cloud-backed AI features depend on a valid key, network access, and provider availability.
 
 ## How to use
 
